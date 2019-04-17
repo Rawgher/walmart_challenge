@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     marginTop: 10,
-    zIndex: 1,
     fontWeight: "bold",
     backgroundColor: "black",
     marginLeft: -70
@@ -48,6 +47,6 @@ const styles = StyleSheet.create({
     borderStyle: "solid"
   },
   whiteText: {
-    color: "white"
+    color: "#F2F2F2"
   }
 });
