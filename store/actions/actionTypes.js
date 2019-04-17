@@ -1,1 +1,1 @@
-export const DISCOUNT_APPLIED = "DISCOUNT_APPLIED";
+export const DISCOUNT_CODE = "DISCOUNT_CODE";

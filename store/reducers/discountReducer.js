@@ -1,17 +1,15 @@
-import { DISCOUNT_APPLIED } from "../actions/actionTypes";
+import { DISCOUNT_CODE } from "../actions/actionTypes";
 
 const initialState = {
-  discountCode: "",
-  estTotal: 108.03
+  value: ""
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case DISCOUNT_APPLIED:
+    case DISCOUNT_CODE:
       return {
         ...state,
-        discountCode: action.payload,
-        estTotal: 108.03 * 0.9
+        value: action.payload
       };
     default:
       return state;

@@ -7,14 +7,14 @@ import {
   View
 } from "react-native";
 import { connect } from "react-redux";
-import { discountApplied } from "../store/actions/index";
+import { handleChange } from "../store/actions/discountCodeActions";
 
 class Discount extends Component {
   constructor(props, context) {
     super(props, context);
   }
-  discountApplied = e => {
-    this.props.discountApplied(e);
+  handleChange = e => {
+    this.props.handleChange(e);
   };
 
   render() {
@@ -27,7 +27,7 @@ class Discount extends Component {
           <TextInput
             style={styles.inputBorder}
             value={this.props.discountCode}
-            onSubmitEditing={this.discountApplied}
+            onChangeText={this.handleChange}
           />
           <TouchableOpacity
             style={styles.button}
@@ -69,13 +69,7 @@ const mapStateToProps = state => ({
   discountCode: state.discountCode.value
 });
 
-// const mapStateToProps = dispatch => {
-//   return {
-//     discountApplied: text => dispatch({ type: "DISCOUNT_APPLIED", text })
-//   };
-// };
-
 export default connect(
   mapStateToProps,
-  { discountApplied }
+  { handleChange }
 )(Discount);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { connect } from "react-redux";
-import { discountApplied } from "../store/actions/index";
+import { handleChange } from "../store/actions/discountCodeActions";
 import Discount from "./Discount";
 import ItemCard from "./ItemCard";
 import Tooltip from "./Tooltip";
@@ -40,14 +40,13 @@ class Summary extends Component {
   };
 
   giveDiscount = () => {
-    this.props.discountCode !== "DISCOUNT" || "discount"
-      ? this.setState(
-          { estTotal: this.state.estTotal * 0.9 },
-          this.setState({
-            stopDiscount: true
-          })
-        )
-      : alert("Incorrect promo code");
+    if (this.props.discountCode === "DISCOUNT") {
+      this.setState({ estTotal: this.state.estTotal * 0.9 }, function() {
+        this.setState({
+          stopDiscount: true
+        });
+      });
+    }
   };
 
   render() {
@@ -76,6 +75,7 @@ class Summary extends Component {
             <Text style={styles.boldFont}>${this.state.taxes}</Text>
           </View>
         </View>
+
         <View style={styles.sectionSpacing}>
           <View style={styles.flexBox}>
             <Text style={styles.estTotalSize}>Est. Total</Text>
@@ -95,6 +95,7 @@ class Summary extends Component {
             {this.state.showItemDetails ? <ItemCard /> : null}
           </View>
         </View>
+
         <View style={styles.marginTop}>
           <TouchableOpacity onPress={this.togglePromoInput}>
             <View style={styles.flexBoxNoSpace}>
@@ -176,5 +177,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { discountApplied }
+  { handleChange }
 )(Summary);

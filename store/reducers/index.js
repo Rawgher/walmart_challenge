@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import discountReducer from "./discountReducer";
+import discountCodeReducer from "./discountReducer";
 
 export default combineReducers({
-  discountCode: discountReducer
+  discountCode: discountCodeReducer
 });
