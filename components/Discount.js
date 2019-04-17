@@ -27,7 +27,7 @@ class Discount extends Component {
           <TextInput
             style={styles.inputBorder}
             value={this.props.discountCode}
-            onChange={this.discountApplied}
+            onSubmitEditing={this.discountApplied}
           />
           <TouchableOpacity
             style={styles.button}

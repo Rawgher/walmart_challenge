@@ -40,14 +40,14 @@ class Summary extends Component {
   };
 
   giveDiscount = () => {
-    if (this.props.discountCode == "DISCOUNT" || "discount") {
-      this.setState(
-        { estTotal: this.state.estTotal * 0.9 },
-        this.setState({
-          stopDiscount: true
-        })
-      );
-    }
+    this.props.discountCode !== "DISCOUNT" || "discount"
+      ? this.setState(
+          { estTotal: this.state.estTotal * 0.9 },
+          this.setState({
+            stopDiscount: true
+          })
+        )
+      : alert("Incorrect promo code");
   };
 
   render() {
@@ -79,7 +79,9 @@ class Summary extends Component {
         <View style={styles.sectionSpacing}>
           <View style={styles.flexBox}>
             <Text style={styles.estTotalSize}>Est. Total</Text>
-            <Text style={styles.estTotalSize}>${this.state.estTotal}</Text>
+            <Text style={styles.estTotalSize}>
+              ${this.state.estTotal.toFixed(2)}
+            </Text>
           </View>
           <View style={styles.paddingBot}>
             <TouchableOpacity onPress={this.toggleItemDetails}>
