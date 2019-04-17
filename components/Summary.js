@@ -3,8 +3,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { connect } from "react-redux";
 import { handleChange } from "../store/actions/discountCodeActions";
 import Discount from "./Discount";
-import ItemCard from "./ItemCard";
-import Tooltip from "./Tooltip";
+import EstTotal from "./EstTotal";
+import Pricing from "./Pricing";
 class Summary extends Component {
   constructor(props) {
     super(props);
@@ -52,49 +52,19 @@ class Summary extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.sectionSpacing}>
-          <View style={styles.flexBox}>
-            <Text>Subtotal</Text>
-            <Text style={styles.boldFont}>${this.state.subTotal}</Text>
-          </View>
-          <View style={styles.flexBox}>
-            <View style={styles.tooltipFlexBox}>
-              <TouchableOpacity onPress={this.showTooltip}>
-                <Text style={styles.decoration}>Pickup savings</Text>
-              </TouchableOpacity>
-              {this.state.showTooltip ? <Tooltip /> : null}
-            </View>
-            <Text style={[styles.redText, styles.boldFont]}>
-              -${this.state.pickUpSaving}
-            </Text>
-          </View>
-          <View style={[styles.flexBox, styles.paddingBot]}>
-            <Text style={styles.estTaxView}>
-              Est. taxes & fees (Based on 94085)
-            </Text>
-            <Text style={styles.boldFont}>${this.state.taxes}</Text>
-          </View>
-        </View>
+        <Pricing
+          subTotal={this.state.subTotal}
+          showTooltip={() => this.showTooltip()}
+          showTooltipState={this.state.showTooltip}
+          pickUpSaving={this.state.pickUpSaving}
+          taxes={this.state.taxes}
+        />
 
-        <View style={styles.sectionSpacing}>
-          <View style={styles.flexBox}>
-            <Text style={styles.estTotalSize}>Est. Total</Text>
-            <Text style={styles.estTotalSize}>
-              ${this.state.estTotal.toFixed(2)}
-            </Text>
-          </View>
-          <View style={styles.paddingBot}>
-            <TouchableOpacity onPress={this.toggleItemDetails}>
-              <View style={styles.flexBoxNoSpace}>
-                <Text style={[styles.decoration, styles.padRight]}>
-                  {this.state.showItemDetails ? "Hide" : "See"} item details
-                </Text>
-                <Text>{this.state.showItemDetails ? "-" : "+"}</Text>
-              </View>
-            </TouchableOpacity>
-            {this.state.showItemDetails ? <ItemCard /> : null}
-          </View>
-        </View>
+        <EstTotal
+          toggleItemDetails={() => this.toggleItemDetails()}
+          showItemDetails={this.state.showItemDetails}
+          estTotal={this.state.estTotal}
+        />
 
         <View style={styles.marginTop}>
           <TouchableOpacity onPress={this.togglePromoInput}>
